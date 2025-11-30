@@ -43,7 +43,7 @@ public class PubSubController {
     String data = message.getData();
     String target =
         !StringUtils.isEmpty(data) ? new String(Base64.getDecoder().decode(data)) : "World";
-    String msg = "Hello from githubc repository bitch" + target + "!";
+    String msg = "Hello from github repository bitch" + target + "!";
 
     System.out.println(msg);
     return new ResponseEntity<>(msg, HttpStatus.OK);
