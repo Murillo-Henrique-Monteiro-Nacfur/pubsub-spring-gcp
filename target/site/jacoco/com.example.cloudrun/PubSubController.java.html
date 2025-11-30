@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PubSubController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pubsub</a> &gt; <a href="index.source.html" class="el_package">com.example.cloudrun</a> &gt; <span class="el_source">PubSubController.java</span></div><h1>PubSubController.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.example.cloudrun;
+
+// [START cloudrun_pubsub_handler]
+import com.example.cloudrun.Body;
+import java.util.Base64;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+// PubsubController consumes a Pub/Sub message.
+@RestController
+<span class="fc" id="L32">public class PubSubController {</span>
+  @RequestMapping(value = &quot;/&quot;, method = RequestMethod.POST)
+  public ResponseEntity&lt;String&gt; receiveMessage(@RequestBody Body body) {
+    // Get PubSub message from request body.
+<span class="fc" id="L36">    Body.Message message = body.getMessage();</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">    if (message == null) {</span>
+<span class="fc" id="L38">      String msg = &quot;Bad Request: invalid Pub/Sub message format&quot;;</span>
+<span class="fc" id="L39">      System.out.println(msg);</span>
+<span class="fc" id="L40">      return new ResponseEntity&lt;&gt;(msg, HttpStatus.BAD_REQUEST);</span>
+    }
+
+<span class="fc" id="L43">    String data = message.getData();</span>
+    String target =
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        !StringUtils.isEmpty(data) ? new String(Base64.getDecoder().decode(data)) : &quot;World&quot;;</span>
+<span class="fc" id="L46">    String msg = &quot;Hello &quot; + target + &quot;!&quot;;</span>
+
+<span class="fc" id="L48">    System.out.println(msg);</span>
+<span class="fc" id="L49">    return new ResponseEntity&lt;&gt;(msg, HttpStatus.OK);</span>
+  }
+}
+// [END cloudrun_pubsub_handler]
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

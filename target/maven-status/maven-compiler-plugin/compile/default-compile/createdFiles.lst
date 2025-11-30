@@ -1,0 +1,4 @@
+com\example\cloudrun\PubSubController.class
+com\example\cloudrun\Body$Message.class
+com\example\cloudrun\Body.class
+com\example\cloudrun\PubSubApplication.class

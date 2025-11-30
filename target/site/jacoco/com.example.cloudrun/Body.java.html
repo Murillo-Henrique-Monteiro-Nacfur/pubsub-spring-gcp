@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Body.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pubsub</a> &gt; <a href="index.source.html" class="el_package">com.example.cloudrun</a> &gt; <span class="el_source">Body.java</span></div><h1>Body.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2019 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.example.cloudrun;
+
+// Body.Message is the payload of a Pub/Sub event. Please refer to the docs for
+// additional information regarding Pub/Sub events.
+public class Body {
+
+  private Message message;
+
+<span class="fc" id="L25">  public Body() {}</span>
+
+  public Message getMessage() {
+<span class="fc" id="L28">    return message;</span>
+  }
+
+  public void setMessage(Message message) {
+<span class="fc" id="L32">    this.message = message;</span>
+<span class="fc" id="L33">  }</span>
+
+  public class Message {
+
+    private String messageId;
+    private String publishTime;
+    private String data;
+
+<span class="fc" id="L41">    public Message() {}</span>
+
+<span class="nc" id="L43">    public Message(String messageId, String publishTime, String data) {</span>
+<span class="nc" id="L44">      this.messageId = messageId;</span>
+<span class="nc" id="L45">      this.publishTime = publishTime;</span>
+<span class="nc" id="L46">      this.data = data;</span>
+<span class="nc" id="L47">    }</span>
+
+    public String getMessageId() {
+<span class="nc" id="L50">      return messageId;</span>
+    }
+
+    public void setMessageId(String messageId) {
+<span class="fc" id="L54">      this.messageId = messageId;</span>
+<span class="fc" id="L55">    }</span>
+
+    public String getPublishTime() {
+<span class="nc" id="L58">      return publishTime;</span>
+    }
+
+    public void setPublishTime(String publishTime) {
+<span class="fc" id="L62">      this.publishTime = publishTime;</span>
+<span class="fc" id="L63">    }</span>
+
+    public String getData() {
+<span class="fc" id="L66">      return data;</span>
+    }
+
+    public void setData(String data) {
+<span class="fc" id="L70">      this.data = data;</span>
+<span class="fc" id="L71">    }</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

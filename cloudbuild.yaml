@@ -1,0 +1,29 @@
+steps:
+  # Etapa 1: Build com Maven e Jib
+  # O Jib criará a imagem do contêiner e a enviará para o Artifact Registry.
+  # As variáveis como ${_PROJECT_ID} são fornecidas pelo gatilho do Cloud Build.
+  - name: 'gcr.io/cloud-builders/mvn'
+    args:
+      - compile
+      - jib:build
+      - -Dimage=${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/pubsub
+
+  # Etapa 2: Deploy no Cloud Run
+  # Esta etapa usa a imagem enviada na etapa anterior para implantar o serviço.
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'pubsub-tutorial' # Nome do seu serviço no Cloud Run
+      - '--image'
+      - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/pubsub'
+      - '--region'
+      - '${_REGION}'
+      - '--no-allow-unauthenticated'
+      - '--project'
+      - '${_PROJECT_ID}'
+
+# Define a imagem que será o resultado final deste build.
+images:
+  - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/pubsub'
