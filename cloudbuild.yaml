@@ -27,3 +27,8 @@ steps:
 # Define a imagem que será o resultado final deste build.
 images:
   - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/pubsub'
+
+# Configurações opcionais do build
+options:
+  # Aponta para o bucket do Cloud Storage onde os logs de build serão armazenados.
+  logsBucket: 'gs://default-postech-fiap-build-logs'
